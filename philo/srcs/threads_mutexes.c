@@ -6,7 +6,7 @@
 /*   By: gmassoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 04:20:27 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/02 04:46:45 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:06:42 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	init_philos(t_data *data)
 		data->philos[i].death_mutex = &data->death_mutex;
 		data->philos[i].msg_mutex = &data->msg_mutex;
 		data->philos[i].left_fork = &data->forks[i];
+		data->philos[i].philo_nb = data->philo_nb;
 		if (i == 0)
 			data->philos[i].right_fork = &data->forks[data->philo_nb - 1];
 		else

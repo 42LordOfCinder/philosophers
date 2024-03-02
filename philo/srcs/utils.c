@@ -6,7 +6,7 @@
 /*   By: gmassoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 03:11:10 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/02 04:32:03 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/03/02 16:07:14 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	print_log(char *log, t_philo *philo)
 
 	pthread_mutex_lock(philo->msg_mutex);
 	mtime = get_mtime() - philo->start_time;
-	printf("%ld %d %s\n", mtime, philo->id, log);
+	if (*philo->death == false)
+		printf("%ld %d %s\n", mtime, philo->id, log);
 	pthread_mutex_unlock(philo->msg_mutex);
 }

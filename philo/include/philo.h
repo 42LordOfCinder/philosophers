@@ -6,7 +6,7 @@
 /*   By: gmassoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 03:06:31 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/02 13:52:29 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:05:59 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_philo
 	long			start_time;
 	long			last_meal_time;
 	long			meals_eaten;
+	int				philo_nb;
 	pthread_mutex_t	*death_mutex;
 	pthread_mutex_t	*msg_mutex;
 	pthread_mutex_t	*right_fork;
