@@ -6,7 +6,7 @@
 /*   By: gmassoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 04:20:27 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/02 04:21:46 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/03/02 04:46:45 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int	init_philos(t_data *data)
 			data->philos[i].right_fork = &data->forks[data->philo_nb - 1];
 		else
 			data->philos[i].right_fork = &data->forks[i - 1];
-		if (pthread_create(&data->philos[i].th, NULL, &routine, NULL))
+		if (pthread_create(&data->philos[i].th, NULL, &routine,
+			(void *)&data->philos[i]))
 		{
 			ft_putstr_fd(2, "Error: Failed to creat thread\n");
 			return (1);
