@@ -4,20 +4,15 @@ NAME = philo
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=thread -g
+CFLAGS = -Wall -Wextra -Werror -fsanitize=thread
 
 INCLUDE = ./include
 
-SRCS = srcs/main.c    \
-	   srcs/init.c    \
-	   srcs/check.c   \
-	   srcs/utils.c   \
-	   srcs/destroy.c \
-	   srcs/actions.c \
-	   srcs/routine.c \
-	   srcs/parsing.c \
+SRCS = main.c utils.c routine.c threads_mutexes.c
 
-OBJS = $(SRCS:.c=.o)
+SRCS_FOLDER = srcs/
+
+OBJS = $(addprefix $(SRCS_FOLDER),$(SRCS:.c=.o))
 
 all: $(NAME)
 
