@@ -8,7 +8,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 INCLUDE = ./include
 
-SRCS = main.c
+SRCS = main.c utils.c
 
 SRCS_FOLDER = srcs
 
