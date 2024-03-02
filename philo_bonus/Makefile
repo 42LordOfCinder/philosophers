@@ -1,6 +1,6 @@
 SHELL = bash
 
-NAME = philo
+NAME = philo_bonus
 
 CC = clang
 
@@ -8,7 +8,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 INCLUDE = ./include
 
-SRCS = main.c utils.c routine.c threads_mutexes.c
+SRCS = main.c
 
 SRCS_FOLDER = srcs
 
@@ -21,7 +21,7 @@ SRCS := $(addprefix $(SRCS_FOLDER)/, $(SRCS))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -lc -lpthread -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 $(OBJS_FOLDER)/%.o: $(SRCS_FOLDER)/%.c
 	mkdir -p $(@D)
