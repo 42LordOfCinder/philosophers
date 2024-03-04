@@ -4,7 +4,7 @@ NAME = philo
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=thread
 
 INCLUDE = ./include
 

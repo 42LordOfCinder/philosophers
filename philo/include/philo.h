@@ -6,13 +6,14 @@
 /*   By: gmassoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 03:06:31 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/04 15:37:47 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/03/04 17:14:22 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
+# define _GNU_SOURCE
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -62,7 +63,7 @@ int		main(int argc, char **argv);
 // Utils
 bool	is_corr(long n);
 int		parsing(int argc, char **argv, t_data *data);
-void	msleep(long ms);
+bool	msleep(long ms, t_philo *philo);
 void	ft_putstr_fd(int fd, char *str);
 long	ft_atol(char *str);
 void	*ft_calloc(size_t nmemb, size_t size);
@@ -77,8 +78,8 @@ void	destroy_and_free(t_data *data);
 
 // Routine
 void	philo_thinks(t_philo *philo);
-void	philo_sleeps(t_philo *philo);
-void	philo_eats(t_philo *philo);
+bool	philo_sleeps(t_philo *philo);
+bool	philo_eats(t_philo *philo);
 int		check_condition(t_philo *philo);
 void	*routine(void *param);
 #endif

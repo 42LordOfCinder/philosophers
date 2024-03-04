@@ -6,19 +6,24 @@
 /*   By: gmassoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 03:08:33 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/04 15:25:51 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:22:06 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	msleep(long ms)
+bool	msleep(long ms, t_philo *philo)
 {
 	long	start;
 
 	start = get_mtime();
 	while (get_mtime() < start + ms)
+	{
 		usleep(100);
+		if (check_condition(philo))
+			return (true);
+	}
+	return (false);
 }
 
 bool	is_corr(long n)
