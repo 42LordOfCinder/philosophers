@@ -6,7 +6,7 @@
 /*   By: gmassoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 04:26:08 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/02 16:37:29 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:33:45 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	check_condition(t_philo *philo)
 		return (1);
 	}
 	pthread_mutex_unlock(philo->death_mutex);
-	if (philo->meals_eaten >= philo->args->goal)
+	if (philo->meals_eaten == philo->args->goal)
 		return (1);
 	return (0);
 }

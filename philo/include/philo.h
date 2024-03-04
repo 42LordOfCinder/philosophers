@@ -6,7 +6,7 @@
 /*   By: gmassoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 03:06:31 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/02 16:35:40 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:37:47 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_data
 int		main(int argc, char **argv);
 
 // Utils
+bool	is_corr(long n);
 int		parsing(int argc, char **argv, t_data *data);
 void	msleep(long ms);
 void	ft_putstr_fd(int fd, char *str);

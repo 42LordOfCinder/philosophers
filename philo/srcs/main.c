@@ -6,7 +6,7 @@
 /*   By: gmassoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 03:08:33 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/02 16:36:54 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:25:51 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 
 void	msleep(long ms)
 {
-	long	i;
+	long	start;
 
-	i = 0;
-	while (i < ms)
-	{
-		usleep(1000);
-		i++;
-	}
+	start = get_mtime();
+	while (get_mtime() < start + ms)
+		usleep(100);
+}
+
+bool	is_corr(long n)
+{
+	if (n <= 0 || n > 2147483647)
+		return (false);
+	return (true);
 }
 
 int	parsing(int argc, char **argv, t_data *data)
@@ -36,9 +40,11 @@ int	parsing(int argc, char **argv, t_data *data)
 			data->args.goal = ft_atol(argv[5]);
 		else
 			data->args.goal = -1;
-		if (data->args.philo_nb <= 0 || data->args.time_to_die <= 0
-			|| data->args.time_to_eat <= 0 || data->args.time_to_sleep <= 0
-			|| (argc == 6 && data->args.goal < 0))
+		if (!is_corr(data->args.philo_nb) || !is_corr(data->args.time_to_die)
+			|| !is_corr(data->args.time_to_eat)
+			|| !is_corr(data->args.time_to_sleep)
+			|| (argc == 6 && (data->args.goal < 0
+				|| data->args.goal > 2147483647)))
 		{
 			ft_putstr_fd(2, "Error: Bad input\n");
 			return (1);
