@@ -6,7 +6,7 @@
 /*   By: gmassoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:42:40 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/05 16:38:22 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:28:12 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,9 @@ void	print_log(char *log, t_philo *philo)
 {
 	long	mtime;
 
+	sem_wait(philo->msg_sem);
 	mtime = get_mtime() - philo->start_time;
 	if (*philo->death == false)
 		printf("%ld %d %s\n", mtime, philo->id, log);
+	sem_post(philo->msg_sem);
 }

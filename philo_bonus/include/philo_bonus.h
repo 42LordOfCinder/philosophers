@@ -6,7 +6,7 @@
 /*   By: gmassoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:22:41 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/05 17:07:45 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/03/06 00:24:43 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdbool.h>
 # include <sys/time.h>
 # include <sys/wait.h>
+# include <fcntl.h>
 # include <semaphore.h>
 
 // Structs
@@ -40,6 +41,9 @@ typedef struct s_philo
 	long	start_time;
 	long	last_meal_time;
 	long	meals_eaten;
+	sem_t	*death_sem;
+	sem_t	*msg_sem;
+	sem_t	*forks;
 }	t_philo;
 
 typedef struct s_data
@@ -47,6 +51,9 @@ typedef struct s_data
 	t_philo	*philos;
 	t_args	args;
 	bool	death;
+	sem_t	*death_sem;
+	sem_t	*msg_sem;
+	sem_t	*forks;
 }	t_data;
 
 // Main
@@ -63,6 +70,7 @@ long	get_mtime(void);
 void	print_log(char *log, t_philo *philo);
 
 // Processes and semaphores
+void	init_semaphores(t_data *data);
 int		init_philos(t_data *data);
 int		wait_philos(t_data *data);
 void	destroy_and_free(t_data *data);

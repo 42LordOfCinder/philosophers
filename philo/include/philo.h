@@ -6,14 +6,13 @@
 /*   By: gmassoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 03:06:31 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/04 17:14:22 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:22:36 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# define _GNU_SOURCE
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -22,7 +21,6 @@
 # include <sys/time.h>
 
 // Structs
-
 typedef struct s_args
 {
 	int		philo_nb;

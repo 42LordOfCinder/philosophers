@@ -21,7 +21,7 @@ SRCS := $(addprefix $(SRCS_FOLDER)/, $(SRCS))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -lc -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -lpthread -lc -o $(NAME)
 
 $(OBJS_FOLDER)/%.o: $(SRCS_FOLDER)/%.c
 	mkdir -p $(@D)

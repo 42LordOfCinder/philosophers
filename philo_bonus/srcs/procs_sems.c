@@ -6,11 +6,22 @@
 /*   By: gmassoni <gmassoni@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:23:10 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/05 16:45:48 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/03/06 00:52:38 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
+
+void	init_semaphores(t_data *data)
+{
+	sem_unlink("/death_sem");
+	sem_unlink("/msg_sem");
+	sem_unlink("/forks");
+	data->death_sem = sem_open("/death_sem", O_CREAT, 0644, 1);
+	data->msg_sem = sem_open("/msg_sem", O_CREAT, 0644, 1);
+	data->forks = sem_open("/forks", O_CREAT, 0644,
+		data->args.philo_nb);
+}
 
 int	init_philos(t_data *data)
 {
@@ -26,6 +37,9 @@ int	init_philos(t_data *data)
 		data->philos[i].death = &data->death;
 		data->philos[i].args = &data->args;
 		data->philos[i].start_time = start_time;
+		data->philos[i].death_sem = data->death_sem;
+		data->philos[i].msg_sem = data->msg_sem;
+		data->philos[i].forks = data->forks;
 		pid = fork();
 		if (pid == -1)
 		{
@@ -59,6 +73,12 @@ int	wait_philos(t_data *data)
 
 void	destroy_and_free(t_data *data)
 {
+	sem_close(data->death_sem);
+	sem_close(data->msg_sem);
+	sem_close(data->forks);
+	sem_unlink("/death_sem");
+	sem_unlink("/msg_sem");
+	sem_unlink("/forks");
 	if (data->philos)
 		free(data->philos);
 }
