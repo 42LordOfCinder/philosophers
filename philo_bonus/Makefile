@@ -8,7 +8,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 INCLUDE = ./include
 
-SRCS = main.c utils.c
+SRCS = main.c utils.c procs_sems.c routine.c
 
 SRCS_FOLDER = srcs
 
@@ -21,7 +21,7 @@ SRCS := $(addprefix $(SRCS_FOLDER)/, $(SRCS))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -lc -o $(NAME)
 
 $(OBJS_FOLDER)/%.o: $(SRCS_FOLDER)/%.c
 	mkdir -p $(@D)

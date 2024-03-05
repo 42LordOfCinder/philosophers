@@ -6,7 +6,7 @@
 /*   By: gmassoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 03:08:33 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/04 16:22:06 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:58:49 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ int	parsing(int argc, char **argv, t_data *data)
 			|| !is_corr(data->args.time_to_eat)
 			|| !is_corr(data->args.time_to_sleep)
 			|| (argc == 6 && (data->args.goal < 0
-				|| data->args.goal > 2147483647)))
+					|| data->args.goal > 2147483647)))
 		{
 			ft_putstr_fd(2, "Error: Bad input\n");
 			return (1);
 		}
 		return (0);
 	}
-	ft_putstr_fd(2, "Error: Expected 5 or 6 arguments\n");
+	ft_putstr_fd(2, "Error: Expected 4 or 5 arguments\n");
 	return (1);
 }
 
@@ -70,7 +70,7 @@ int	main(int argc, char **argv)
 	data.philos = ft_calloc(data.args.philo_nb, sizeof(t_philo));
 	if (!data.forks || !data.philos)
 	{
-		ft_putstr_fd(2, "Error: Memory allocation failure\n");
+		ft_putstr_fd(2, "Error: Memory allocation failed\n");
 		return (1);
 	}
 	init_mutexes(&data);

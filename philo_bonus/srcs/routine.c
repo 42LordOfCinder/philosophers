@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmassoni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmassoni <gmassoni@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/02 04:26:08 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/05 15:55:55 by gmassoni         ###   ########.fr       */
+/*   Created: 2024/03/05 16:26:02 by gmassoni          #+#    #+#             */
+/*   Updated: 2024/03/05 17:00:00 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 void	philo_thinks(t_philo *philo)
 {
@@ -29,21 +29,19 @@ bool	philo_eats(t_philo *philo)
 {
 	bool	res;
 
-	pthread_mutex_lock(philo->right_fork);
+	// lock right fork
 	print_log("has taken a fork", philo);
 	if (philo->args->philo_nb == 1)
-	{
-		pthread_mutex_unlock(philo->right_fork);
+		// unlock right fork
 		return (msleep(philo->args->time_to_die, philo));
-	}
-	pthread_mutex_lock(philo->left_fork);
+	// lock left fork
 	print_log("has taken a fork", philo);
 	philo->meals_eaten++;
 	philo->last_meal_time = get_mtime();
 	print_log("is eating", philo);
 	res = msleep(philo->args->time_to_eat, philo);
-	pthread_mutex_unlock(philo->left_fork);
-	pthread_mutex_unlock(philo->right_fork);
+	// unlock left fork
+	// unlock right fork
 	if (res)
 		return (true);
 	return (false);
@@ -51,34 +49,23 @@ bool	philo_eats(t_philo *philo)
 
 int	check_condition(t_philo *philo)
 {
-	pthread_mutex_lock(philo->death_mutex);
 	if (*philo->death == true)
-	{
-		pthread_mutex_unlock(philo->death_mutex);
 		return (true);
-	}
 	if (get_mtime() - philo->last_meal_time >= philo->args->time_to_die)
 	{
 		print_log("died", philo);
 		*philo->death = true;
-		pthread_mutex_unlock(philo->death_mutex);
 		return (1);
 	}
-	pthread_mutex_unlock(philo->death_mutex);
 	if (philo->meals_eaten == philo->args->goal)
 		return (1);
 	return (0);
 }
 
-void	*routine(void *param)
+void	routine(t_philo *philo)
 {
-	t_philo	*philo;
-
-	philo = (t_philo *)param;
 	philo->last_meal_time = philo->start_time;
 	philo->meals_eaten = 0;
-	if (philo->id % 2 == 0)
-		msleep(10, philo);
 	while (true)
 	{
 		if (philo_eats(philo))
@@ -89,5 +76,5 @@ void	*routine(void *param)
 		if (check_condition(philo))
 			break ;
 	}
-	return (NULL);
+	exit(0);
 }

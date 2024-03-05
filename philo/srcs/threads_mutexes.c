@@ -6,7 +6,7 @@
 /*   By: gmassoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 04:20:27 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/02 16:38:34 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:04:13 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ void	init_mutexes(t_data *data)
 
 int	init_philos(t_data *data)
 {
-	int	i;
+	int		i;
+	long	start_time;
 
 	i = -1;
+	start_time = get_mtime();
 	while (++i < data->args.philo_nb)
 	{
 		data->philos[i].id = i + 1;
@@ -40,6 +42,7 @@ int	init_philos(t_data *data)
 		data->philos[i].msg_mutex = &data->msg_mutex;
 		data->philos[i].left_fork = &data->forks[i];
 		data->philos[i].right_fork = &data->forks[i - 1];
+		data->philos[i].start_time = start_time;
 		if (i == 0)
 			data->philos[i].right_fork = &data->forks[data->args.philo_nb - 1];
 		if (pthread_create(&data->philos[i].th, NULL, &routine,
