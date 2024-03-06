@@ -6,7 +6,7 @@
 /*   By: gmassoni <gmassoni@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:26:02 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/06 00:42:35 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/03/06 01:59:57 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,11 @@ bool	philo_eats(t_philo *philo)
 
 int	check_condition(t_philo *philo)
 {
-	sem_wait(philo->death_sem);
-	if (*philo->death == true)
-	{
-		sem_post(philo->death_sem);
-		return (true);
-	}
 	if (get_mtime() - philo->last_meal_time >= philo->args->time_to_die)
 	{
 		print_log("died", philo);
-		*philo->death = true;
-		sem_post(philo->death_sem);
-		return (1);
+		exit(1);
 	}
-	sem_post(philo->death_sem);
 	if (philo->meals_eaten == philo->args->goal)
 		return (1);
 	return (0);

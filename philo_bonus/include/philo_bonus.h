@@ -6,7 +6,7 @@
 /*   By: gmassoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:22:41 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/06 00:24:43 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/03/06 02:06:41 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include <semaphore.h>
+# include <signal.h>
 
 // Structs
 typedef struct s_args
@@ -37,11 +38,9 @@ typedef struct s_philo
 	pid_t	pid;
 	int		id;
 	t_args	*args;
-	bool	*death;
 	long	start_time;
 	long	last_meal_time;
 	long	meals_eaten;
-	sem_t	*death_sem;
 	sem_t	*msg_sem;
 	sem_t	*forks;
 }	t_philo;
@@ -50,8 +49,6 @@ typedef struct s_data
 {
 	t_philo	*philos;
 	t_args	args;
-	bool	death;
-	sem_t	*death_sem;
 	sem_t	*msg_sem;
 	sem_t	*forks;
 }	t_data;

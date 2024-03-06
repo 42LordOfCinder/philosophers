@@ -6,7 +6,7 @@
 /*   By: gmassoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:23:27 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/05 23:18:01 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/03/06 01:59:00 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	init_semaphores(&data);
-	data.death = false;
 	if (init_philos(&data) || wait_philos(&data))
 	{
 		destroy_and_free(&data);
