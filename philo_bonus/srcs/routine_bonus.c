@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   routine_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmassoni <gmassoni@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:26:02 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/06 01:59:57 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:28:18 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ bool	philo_eats(t_philo *philo)
 
 	sem_wait(philo->forks);
 	print_log("has taken a fork", philo);
-	if (philo->args->philo_nb == 1)
+	if (philo->args->philo_nb == 1 || check_condition(philo))
 	{
 		sem_post(philo->forks);
-		return (msleep(philo->args->time_to_die, philo));
+		if (philo->args->philo_nb == 1)
+			msleep(philo->args->time_to_die, philo);
+		return (true);
 	}
 	sem_wait(philo->forks);
 	print_log("has taken a fork", philo);

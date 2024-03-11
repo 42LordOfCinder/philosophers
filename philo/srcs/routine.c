@@ -6,7 +6,7 @@
 /*   By: gmassoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 04:26:08 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/05 15:55:55 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:27:01 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ bool	philo_eats(t_philo *philo)
 
 	pthread_mutex_lock(philo->right_fork);
 	print_log("has taken a fork", philo);
-	if (philo->args->philo_nb == 1)
+	if (philo->args->philo_nb == 1 || check_condition(philo))
 	{
 		pthread_mutex_unlock(philo->right_fork);
-		return (msleep(philo->args->time_to_die, philo));
+		if (philo->args->philo_nb == 1)
+			msleep(philo->args->time_to_die, philo);
+		return (true);
 	}
 	pthread_mutex_lock(philo->left_fork);
 	print_log("has taken a fork", philo);
