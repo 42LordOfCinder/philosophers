@@ -6,7 +6,7 @@
 /*   By: gmassoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 03:06:31 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/05 23:22:36 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/04/10 08:43:44 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	print_log(char *log, t_philo *philo);
 void	init_mutexes(t_data *data);
 int		init_philos(t_data *data);
 int		join_philos(t_data *data);
-void	destroy_and_free(t_data *data);
+void	destroy_and_free(t_data *data, bool both);
 
 // Routine
 void	philo_thinks(t_philo *philo);

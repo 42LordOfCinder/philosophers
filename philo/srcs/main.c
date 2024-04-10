@@ -6,7 +6,7 @@
 /*   By: gmassoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 03:08:33 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/11 15:30:53 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/04/10 08:44:44 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	main(int argc, char **argv)
 	data.philos = ft_calloc(data.args.philo_nb, sizeof(t_philo));
 	if (!data.forks || !data.philos)
 	{
+		destroy_and_free(&data, false);
 		ft_putstr_fd(2, "Error: Memory allocation failed\n");
 		return (1);
 	}
@@ -77,9 +78,9 @@ int	main(int argc, char **argv)
 	data.death = false;
 	if (init_philos(&data) || join_philos(&data))
 	{
-		destroy_and_free(&data);
+		destroy_and_free(&data, true);
 		return (1);
 	}
-	destroy_and_free(&data);
+	destroy_and_free(&data, true);
 	return (0);
 }

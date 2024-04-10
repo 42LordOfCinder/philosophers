@@ -6,7 +6,7 @@
 /*   By: gmassoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 04:20:27 by gmassoni          #+#    #+#             */
-/*   Updated: 2024/03/11 15:43:53 by gmassoni         ###   ########.fr       */
+/*   Updated: 2024/04/10 08:44:28 by gmassoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,21 @@ int	join_philos(t_data *data)
 	return (0);
 }
 
-void	destroy_and_free(t_data *data)
+void	destroy_and_free(t_data *data, bool both)
 {
 	int	i;
 
-	pthread_mutex_destroy(&data->death_mutex);
-	pthread_mutex_destroy(&data->msg_mutex);
-	i = 0;
-	while (i < data->args.philo_nb)
+	if (both)
 	{
-		pthread_mutex_destroy(&data->forks[i]);
-		i++;
-	}
+		pthread_mutex_destroy(&data->death_mutex);
+		pthread_mutex_destroy(&data->msg_mutex);
+		i = 0;
+		while (i < data->args.philo_nb)
+		{
+			pthread_mutex_destroy(&data->forks[i]);
+			i++;
+		}
+		}
 	if (data->forks)
 		free(data->forks);
 	if (data->philos)
